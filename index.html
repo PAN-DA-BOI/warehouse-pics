@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Map</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('photos/top down.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        .point {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: red;
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            max-width: 80%;
+            max-height: 80%;
+            overflow: auto;
+        }
+
+        .popup img {
+            max-width: 100%;
+            height: auto;
+            margin: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Clickable Points -->
+    <div class="point" style="top: 20%; left: 30%;" onclick="showPopup('point1')"></div>
+    <div class="point" style="top: 50%; left: 70%;" onclick="showPopup('point2')"></div>
+    <div class="point" style="top: 50%; left: 30%;" onclick="showPopup('point3')"></div>
+
+    <!-- Popup Window -->
+    <div id="popup" class="popup">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <div id="popup-content"></div>
+    </div>
+
+    <script>
+        // Photos for each point
+        const photos = {
+            point1: [
+                "photos/1.jpg",
+				"photos/2.jpg",
+				"photos/3.jpg",
+				"photos/27.jpg",
+				"photos/28.jpg",
+				"photos/29.jpg",
+            ],
+            point2: [
+                "photos/11.jpg",
+				"photos/12.jpg",
+				"photos/13.jpg",
+				"photos/14.jpg",
+				"photos/15.jpg",
+				"photos/16.jpg",
+				"photos/17.jpg"
+            ],
+			point3: [
+                "photos/18.jpg",
+				"photos/19.jpg",
+				"photos/20.jpg",
+				"photos/21.jpg",
+				"photos/22.jpg",
+				"photos/23.jpg",
+				"photos/24.jpg",
+				"photos/25.jpg",
+				"photos/26.jpg",
+            ]
+        };
+
+        // Show popup with photos
+        function showPopup(pointId) {
+            const popup = document.getElementById("popup");
+            const popupContent = document.getElementById("popup-content");
+
+            popupContent.innerHTML = "";
+            photos[pointId].forEach(photo => {
+                const img = document.createElement("img");
+                img.src = photo;
+                popupContent.appendChild(img);
+            });
+
+            popup.style.display = "block";
+        }
+
+        // Close popup
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+
+        // Close popup if clicked outside
+        window.onclick = function(event) {
+            const popup = document.getElementById("popup");
+            if (event.target === popup) {
+                popup.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>
