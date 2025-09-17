@@ -16,8 +16,7 @@
             overflow: hidden;
             font-family: Arial, sans-serif;
         }
-
-        .point {
+        .point-red {
             position: absolute;
             width: 15px;
             height: 15px;
@@ -26,7 +25,15 @@
             cursor: pointer;
             transform: translate(-50%, -50%);
         }
-
+        .point-blue {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: blue; /* Changed to blue */
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+        }
         .popup {
             display: none;
             position: fixed;
@@ -42,13 +49,11 @@
             max-height: 80%;
             overflow: auto;
         }
-
         .popup img {
             max-width: 100%;
             height: auto;
             margin: 10px;
         }
-
         .close-btn {
             position: absolute;
             top: 10px;
@@ -60,9 +65,10 @@
 </head>
 <body>
     <!-- Clickable Points -->
-    <div class="point" style="top: 20%; left: 30%;" onclick="showPopup('point1')"></div>
-    <div class="point" style="top: 50%; left: 70%;" onclick="showPopup('point2')"></div>
-    <div class="point" style="top: 50%; left: 30%;" onclick="showPopup('point3')"></div>
+    <div class="point-red" style="top: 20%; left: 30%;" onclick="showPopup('point1')"></div>
+    <div class="point-red" style="top: 50%; left: 70%;" onclick="showPopup('point2')"></div>
+    <div class="point-red" style="top: 50%; left: 30%;" onclick="showPopup('point3')"></div>
+    <div class="point-blue" style="top: 10%; left: 47%;" onclick="showPopup('point4')"></div>
 
     <!-- Popup Window -->
     <div id="popup" class="popup">
@@ -75,31 +81,34 @@
         const photos = {
             point1: [
                 "photos/1.jpg",
-				"photos/2.jpg",
-				"photos/3.jpg",
-				"photos/27.jpg",
-				"photos/28.jpg",
-				"photos/29.jpg",
+                "photos/2.jpg",
+                "photos/3.jpg",
+                "photos/27.jpg",
+                "photos/28.jpg",
+                "photos/29.jpg",
             ],
             point2: [
                 "photos/11.jpg",
-				"photos/12.jpg",
-				"photos/13.jpg",
-				"photos/14.jpg",
-				"photos/15.jpg",
-				"photos/16.jpg",
-				"photos/17.jpg"
+                "photos/12.jpg",
+                "photos/13.jpg",
+                "photos/14.jpg",
+                "photos/15.jpg",
+                "photos/16.jpg",
+                "photos/17.jpg"
             ],
-			point3: [
+            point3: [
                 "photos/18.jpg",
-				"photos/19.jpg",
-				"photos/20.jpg",
-				"photos/21.jpg",
-				"photos/22.jpg",
-				"photos/23.jpg",
-				"photos/24.jpg",
-				"photos/25.jpg",
-				"photos/26.jpg",
+                "photos/19.jpg",
+                "photos/20.jpg",
+                "photos/21.jpg",
+                "photos/22.jpg",
+                "photos/23.jpg",
+                "photos/24.jpg",
+                "photos/25.jpg",
+                "photos/26.jpg",
+            ],
+            point4: [
+                "photos/cam.png"
             ]
         };
 
@@ -107,14 +116,12 @@
         function showPopup(pointId) {
             const popup = document.getElementById("popup");
             const popupContent = document.getElementById("popup-content");
-
             popupContent.innerHTML = "";
             photos[pointId].forEach(photo => {
                 const img = document.createElement("img");
                 img.src = photo;
                 popupContent.appendChild(img);
             });
-
             popup.style.display = "block";
         }
 
